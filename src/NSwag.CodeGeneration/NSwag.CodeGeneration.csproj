@@ -134,6 +134,8 @@
     <Compile Include="CodeGenerators\TypeScript\SwaggerToTypeScriptClientGenerator.cs" />
     <Compile Include="CodeGenerators\CSharp\SwaggerToCSharpWebApiControllerGenerator.cs" />
     <Compile Include="CodeGenerators\CSharp\SwaggerToCSharpWebApiControllerGeneratorSettings.cs" />
+    <Compile Include="Infrastructure\AttributeDocumentationService.cs" />
+    <Compile Include="Infrastructure\DocumentationService.cs" />
     <Compile Include="Infrastructure\ReflectionExtensions.cs" />
     <Compile Include="Infrastructure\T4Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

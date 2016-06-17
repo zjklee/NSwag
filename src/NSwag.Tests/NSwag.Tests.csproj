@@ -86,10 +86,6 @@
       <Project>{2E6174AA-FC75-4821-9E86-51B30568BEC0}</Project>
       <Name>NSwag.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NSwag.Demo.Web\NSwag.Demo.Web.csproj">
-      <Project>{37AE85DE-B127-4861-B925-1A67A35F314A}</Project>
-      <Name>NSwag.Demo.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

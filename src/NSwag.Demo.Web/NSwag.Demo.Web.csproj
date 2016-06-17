@@ -166,10 +166,6 @@
       <Project>{CA084154-E758-4A44-938D-7806AF2DD886}</Project>
       <Name>NSwag.Annotations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NSwag.AssemblyLoader\NSwag.AssemblyLoader.csproj">
-      <Project>{46634c60-ba7d-43e6-9049-6ad461488c39}</Project>
-      <Name>NSwag.AssemblyLoader</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NSwag.CodeGeneration\NSwag.CodeGeneration.csproj">
       <Project>{75B3F91D-687E-4FB3-AD45-CCFA3C406DB4}</Project>
       <Name>NSwag.CodeGeneration</Name>

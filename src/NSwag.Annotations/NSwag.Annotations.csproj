@@ -45,6 +45,9 @@
     <None Include="NSwag.Annotations.nuspec" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DescriptionAttribute.cs" />
+    <Compile Include="JsonDocumentationPathAttribute.cs" />
+    <Compile Include="ModelBinderAttribute.cs" />
     <Compile Include="ResponseTypeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SwaggerIgnoreAttribute.cs" />

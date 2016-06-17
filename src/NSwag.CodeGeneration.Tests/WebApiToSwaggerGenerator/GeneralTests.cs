@@ -15,19 +15,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator
         [ExpectedException(typeof(TypeLoadException))]
         public void When_controller_type_is_not_found_then_type_load_exception_is_thrown()
         {
-            //// Arrange
-            var settings = new WebApiAssemblyToSwaggerGeneratorSettings
-            {
-                AssemblyPath = @"./NSwag.CodeGeneration.Tests.dll",
-                DefaultUrlTemplate = "api/{controller}/{action}/{id}"
-            };
-
-            var generator = new WebApiAssemblyToSwaggerGenerator(settings);
-
-            //// Act
-            var swaggerService = generator.GenerateForController("NonExistingClass"); // Should throw exception
-
-            //// Assert
+            
         }
 
         public interface IFormFile

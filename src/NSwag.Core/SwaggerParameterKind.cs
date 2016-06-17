@@ -38,6 +38,9 @@ namespace NSwag
 
         /// <summary>A form data parameter.</summary>
         [EnumMember(Value = "formData")]
-        FormData
+        FormData,
+
+        [EnumMember(Value = "modelBinder")]
+        ModelBinder
     }
 }

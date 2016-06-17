@@ -8,6 +8,8 @@
 
 using NJsonSchema;
 using NJsonSchema.Generation;
+using NSwag.CodeGeneration.Infrastructure;
+using NSwag.Interfaces;
 
 namespace NSwag.CodeGeneration.SwaggerGenerators.WebApi
 {
@@ -19,9 +21,15 @@ namespace NSwag.CodeGeneration.SwaggerGenerators.WebApi
         {
             DefaultUrlTemplate = "api/{controller}/{action}/{id}";
             NullHandling = NullHandling.Swagger;
+            DocumentationProvider = DocumentationService.Default;
         }
 
         /// <summary>Gets or sets the default Web API URL template.</summary>
         public string DefaultUrlTemplate { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IDocumentationService DocumentationProvider { get; set; }
     }
 }
