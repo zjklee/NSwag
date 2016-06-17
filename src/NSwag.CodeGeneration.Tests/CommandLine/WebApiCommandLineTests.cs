@@ -25,21 +25,6 @@ namespace NSwag.CodeGeneration.Tests.CommandLine
             Assert.IsNotNull(service);
         }
 
-        [TestMethod]
-        public void When_swagger2typescript_is_called_then_file_is_created()
-        {
-            //// Arrange
-            var command = "swagger2tsclient " +
-                          @"/input:""{ \""swagger\"": \""2.0\"", \""paths\"": {}, \""definitions\"": { \""Test\"": { typeName: \""Test\"", type: \""Object\"" } } }"" " +
-                          "/output:" + OutputFile;
-
-            //// Act
-            var output = RunCommandLine(command);
-
-            //// Assert
-            Assert.IsTrue(output.Contains("export interface Test {"));
-        }
-
         private const string OutputFile = "Output.json";
 
         private static string RunCommandLine(string command)

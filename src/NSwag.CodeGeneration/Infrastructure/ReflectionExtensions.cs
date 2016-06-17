@@ -29,5 +29,15 @@ namespace NSwag.CodeGeneration.Infrastructure
             }
             return false;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="memberInfo"></param>
+        /// <returns></returns>
+        public static string GetDocumentation(this MemberInfo memberInfo)
+        {
+            return null;
+        }
     }
 }

@@ -61,15 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AssemblyTypeToSwaggerCommand.cs" />
     <Compile Include="Commands\JsonSchemaToCSharpCommand.cs" />
     <Compile Include="Commands\JsonSchemaToTypeScriptCommand.cs" />
     <Compile Include="Commands\Base\OutputCommandBase.cs" />
-    <Compile Include="Commands\SwaggerToCSharpClientCommand.cs" />
     <Compile Include="Commands\Base\InputOutputCommandBase.cs" />
-    <Compile Include="Commands\SwaggerToCSharpCommand.cs" />
-    <Compile Include="Commands\SwaggerToCSharpControllerCommand.cs" />
-    <Compile Include="Commands\SwaggerToTypeScriptClientCommand.cs" />
     <Compile Include="Commands\WebApiToSwaggerCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

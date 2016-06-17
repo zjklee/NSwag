@@ -21,15 +21,10 @@ namespace NSwag
             {
                 var processor = new CommandLineProcessor(host);
 
-                processor.RegisterCommand<AssemblyTypeToSwaggerCommand>("types2swagger");
                 processor.RegisterCommand<WebApiToSwaggerCommand>("webapi2swagger");
 
                 processor.RegisterCommand<JsonSchemaToCSharpCommand>("jsonschema2csclient");
                 processor.RegisterCommand<JsonSchemaToTypeScriptCommand>("jsonschema2tsclient");
-
-                processor.RegisterCommand<SwaggerToCSharpClientCommand>("swagger2csclient");
-                processor.RegisterCommand<SwaggerToCSharpControllerCommand>("swagger2cscontroller");
-                processor.RegisterCommand<SwaggerToTypeScriptClientCommand>("swagger2tsclient");
 
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();

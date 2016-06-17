@@ -1,5 +1,6 @@
 // Generated using the NSwag toolchain v2.18.5973.40474 (http://NSwag.org)
 define(["require", "exports"], function (require, exports) {
+    "use strict";
     var PersonsClient = (function () {
         function PersonsClient(baseUrl) {
             this.baseUrl = undefined;
@@ -469,7 +470,7 @@ define(["require", "exports"], function (require, exports) {
             }
         };
         return PersonsClient;
-    })();
+    }());
     exports.PersonsClient = PersonsClient;
     (function (ObjectType) {
         ObjectType[ObjectType["Foo"] = "Foo"] = "Foo";
