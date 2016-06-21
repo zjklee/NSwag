@@ -2,7 +2,7 @@
 
 namespace Stucco.NSwag.Annotations
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public class SchemeAttribute : Attribute
     {
         public string Scheme { get; set; }

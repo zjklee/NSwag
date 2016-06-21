@@ -2,7 +2,7 @@
 
 namespace Stucco.NSwag.Annotations
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     public class VersionAttribute : Attribute
     {
         public string Version { get; set; }

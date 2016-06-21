@@ -1,19 +1,37 @@
 {
-    "version": "1.0.0-*",
-    
-    "dependencies": {
-        "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final",
-        "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final",
-        "Microsoft.Extensions.FileProviders.Embedded": "1.0.0-rc2-final"
+    "version": "3.10.0-*",
+
+  "dependencies": {
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final",
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0-rc2-final",
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.1-rc2-24027",
+    "Stucco.Swagger": "1.0.7"
+  },
+
+    "buildOptions": {
+        "embed": [
+            "SwaggerUi/**/*"
+        ],
+        "xmlDoc": false
     },
 
-    "frameworks": {
-        "netstandard1.5": {
-            "imports": [
-                "dotnet5.6",
-                "dnxcore50",
-                "portable-net45+win8"
-            ]
-        }
+  "frameworks": {
+    "netstandard1.5": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ],
+      "dependencies": {
+      }
+    },
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
+  }
 }

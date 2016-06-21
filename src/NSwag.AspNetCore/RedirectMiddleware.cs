@@ -7,8 +7,9 @@
 //-----------------------------------------------------------------------
 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
-namespace NSwag.AspNetCore
+namespace Stucco.NSwag.AspNetCore
 {
     internal class RedirectMiddleware
     {

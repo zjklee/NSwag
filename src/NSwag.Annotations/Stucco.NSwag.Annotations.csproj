@@ -41,6 +41,7 @@
     <AssemblyOriginatorKeyFile>../NSwag.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseRouteAttribute.cs" />
     <Compile Include="DeprecatedAttribute.cs" />
     <Compile Include="DescriptionAttribute.cs" />
     <Compile Include="HeaderAttribute.cs" />

@@ -2,7 +2,7 @@
 
 namespace Stucco.NSwag.Annotations
 {
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Assembly)]
     public class TitleAttribute : Attribute
     {
         public string Title { get; set; }

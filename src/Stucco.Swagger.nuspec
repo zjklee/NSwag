@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>Stucco.Swagger</id>
-        <version>1.0.7</version>
+        <version>1.0.9.2</version>
         <authors>Oleh Formaniuk</authors>
         <description>Impruvements done here</description>
         <tags>swagger</tags>
@@ -26,5 +26,9 @@
 		
 		<file src="NSwag.CodeGeneration\bin\Release\NJsonSchema.CodeGeneration.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />        
         <file src="NSwag.CodeGeneration\bin\Release\NJsonSchema.CodeGeneration.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+		
+		<file src="NSwag.AspNetCore\bin\Release\netcoreapp1.0\NSwag.AspNetCore.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.AspNetCore\bin\Release\netcoreapp1.0\NSwag.AspNetCore.pdb" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.AspNetCore\bin\Release\netcoreapp1.0\NSwag.AspNetCore.deps.json" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
     </files>
 </package>

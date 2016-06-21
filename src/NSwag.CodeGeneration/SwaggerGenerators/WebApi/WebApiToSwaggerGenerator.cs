@@ -149,10 +149,10 @@ namespace Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi
         }
 
         private void LoadTypeDefenition(TypeInfo typeInfo, SwaggerService service)
-        {
-            var customAttributes = typeInfo.GetCustomAttributes().ToList();
+        {            
+            var customAttributes = typeInfo.Assembly.GetCustomAttributes().ToList();
             dynamic routeAttribute = customAttributes
-                .SingleOrDefault(o => o.GetType().Name == "RouteAttribute");
+                .SingleOrDefault(o => o.GetType().Name == "BaseRouteAttribute");
 
             if (routeAttribute != null)
             {
@@ -162,20 +162,53 @@ namespace Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi
                 service.BasePath = template;
             }
 
-            dynamic descriptionAttribute =
-                customAttributes.SingleOrDefault(o => o.GetType().Name == "DescriptionAttribute");
+            try
+            {
+                var descriptionAttribute =
+                    customAttributes.SingleOrDefault(o => o.GetType().Name == "DescriptionAttribute");
+                if (descriptionAttribute != null)
+                {
+                    service.Info.Description = ((dynamic)descriptionAttribute).Description;
+                }
+                else
+                {
+                    service.Info.Description = typeInfo.Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
+                }
+            }
+            catch{}
 
-            service.Info.Description = descriptionAttribute.Description;
+            try
+            {
+                var titleAttribute =
+                    customAttributes.SingleOrDefault(o => o.GetType().Name == "TitleAttribute");
 
-            dynamic titleAttribute =
-                customAttributes.SingleOrDefault(o => o.GetType().Name == "TitleAttribute");
+                if (titleAttribute != null)
+                {
+                    service.Info.Title = ((dynamic) titleAttribute).Title;
+                }
+                else
+                {
+                    service.Info.Title = typeInfo.Assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title;
+                }
+            }
+            catch {}
 
-            service.Info.Title = titleAttribute.Title;
-
-            dynamic versionAttribute =
+            try
+            {
+                var versionAttribute =
                 customAttributes.SingleOrDefault(o => o.GetType().Name == "VersionAttribute");
 
-            service.Info.Version = versionAttribute.Version;
+            
+                if (versionAttribute != null)
+                {
+                    service.Info.Version = ((dynamic) versionAttribute).Version;
+                }
+                else
+                {
+                    service.Info.Version = typeInfo.Assembly.GetCustomAttribute<AssemblyVersionAttribute>().Version;
+                }
+            }
+            catch {}
 
             IEnumerable<dynamic> schemesAttributes =
                 customAttributes.Where(o => o.GetType().Name == "SchemeAttribute");
@@ -869,23 +902,36 @@ namespace Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi
                     };
                 }
 
-                if (!schemaResolver.HasSchema(type, false))
+                try
                 {
-                    var schemaGenerator = new RootTypeJsonSchemaGenerator(service, schemaDefinitionAppender, Settings);
-                    schemaGenerator.Generate(type, null, null, schemaDefinitionAppender, schemaResolver);
+                    if (!schemaResolver.HasSchema(type, false))
+                    {
+                        var schemaGenerator = new RootTypeJsonSchemaGenerator(service, schemaDefinitionAppender, Settings);
+                        schemaGenerator.Generate(type, null, null, schemaDefinitionAppender, schemaResolver);
+                    }
+                }
+                catch
+                {                    
                 }
 
-                if (mayBeNull)
+                try
                 {
-                    if (Settings.NullHandling == NullHandling.JsonSchema)
+                    if (mayBeNull)
                     {
-                        var schema = new JsonSchema4();
-                        schema.OneOf.Add(new JsonSchema4 {Type = JsonObjectType.Null});
-                        schema.OneOf.Add(new JsonSchema4 {SchemaReference = schemaResolver.GetSchema(type, false)});
-                        return schema;
+                        if (Settings.NullHandling == NullHandling.JsonSchema)
+                        {
+                            var schema = new JsonSchema4();
+                            schema.OneOf.Add(new JsonSchema4 {Type = JsonObjectType.Null});
+                            schema.OneOf.Add(new JsonSchema4 {SchemaReference = schemaResolver.GetSchema(type, false)});
+                            return schema;
+                        }
+                        // IsNullable is directly set on SwaggerParameter or SwaggerResponse
+                        return new JsonSchema4 {SchemaReference = schemaResolver.GetSchema(type, false)};
                     }
-                    // IsNullable is directly set on SwaggerParameter or SwaggerResponse
-                    return new JsonSchema4 {SchemaReference = schemaResolver.GetSchema(type, false)};
+                }
+                catch
+                {
+                    // ignore
                 }
                 return new JsonSchema4 {SchemaReference = schemaResolver.GetSchema(type, false)};
             }
