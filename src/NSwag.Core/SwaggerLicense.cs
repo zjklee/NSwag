@@ -8,7 +8,7 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The license information.</summary>
     public class SwaggerLicense

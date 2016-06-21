@@ -8,7 +8,7 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The web service contact description.</summary>
     public class SwaggerContact

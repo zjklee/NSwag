@@ -10,9 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace NSwag.CodeGeneration
-{
-    // Needed for T4 in PCL libraries
+namespace Stucco.NSwag.CodeGeneration.Infrastructure
+{ // Needed for T4 in PCL libraries
 
     internal static class T4Extensions
     {
@@ -22,10 +21,6 @@ namespace NSwag.CodeGeneration
         }
     }
 
-}
-
-namespace System.CodeDom.Compiler
-{
     internal class CompilerErrorCollection : List<CompilerError>
     {
     }

@@ -8,25 +8,21 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The enumeration of Swagger protocol schemes.</summary>
     public enum SwaggerSchema
     {
         /// <summary>The HTTP schema.</summary>
-        [JsonProperty("http")]
-        Http,
+        [JsonProperty("http")] http,
 
         /// <summary>The HTTPS schema.</summary>
-        [JsonProperty("https")]
-        Https,
+        [JsonProperty("https")] https,
 
         /// <summary>The WS schema.</summary>
-        [JsonProperty("ws")]
-        Ws,
+        [JsonProperty("ws")] ws,
 
         /// <summary>The WSS schema.</summary>
-        [JsonProperty("wss")]
-        Wss
+        [JsonProperty("wss")] wss
     }
 }

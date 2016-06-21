@@ -8,13 +8,14 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The web service description.</summary>
     public class SwaggerInfo
     {
         /// <summary>Gets or sets the title.</summary>
-        [JsonProperty(PropertyName = "title", Required = Required.Always, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "title", Required = Required.Always,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string Title { get; set; }
 
         /// <summary>Gets or sets the description.</summary>
@@ -34,7 +35,8 @@ namespace NSwag
         public SwaggerLicense License { get; set; }
 
         /// <summary>Gets or sets the API version.</summary>
-        [JsonProperty(PropertyName = "version", Required = Required.Always, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "version", Required = Required.Always,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string Version { get; set; }
     }
 }

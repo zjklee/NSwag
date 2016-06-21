@@ -8,7 +8,7 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary></summary>
     public enum SwaggerSecuritySchemeType
@@ -17,15 +17,12 @@ namespace NSwag
         Undefined,
 
         /// <summary>Basic authentication.</summary>
-        [JsonProperty("basic")]
-        Basic,
+        [JsonProperty("basic")] Basic,
 
         /// <summary>API key authentication.</summary>
-        [JsonProperty("apiKey")]
-        ApiKey,
+        [JsonProperty("apiKey")] ApiKey,
 
         /// <summary>OAuth2 authentication.</summary>
-        [JsonProperty("oauth2")]
-        OAuth2
+        [JsonProperty("oauth2")] OAuth2
     }
 }

@@ -1,15 +1,14 @@
-﻿namespace NSwag
+﻿namespace Stucco.NSwag.Core
 {
     public class Documentation
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Descripation { get; set; }
-
         public Documentation()
         {
             Descripation = string.Empty;
         }
+
+        /// <summary>
+        /// </summary>
+        public string Descripation { get; set; }
     }
 }

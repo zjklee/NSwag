@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace NSwag.Annotations
+namespace Stucco.NSwag.Annotations
 {
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class ModelBinderAttribute : Attribute
+    public class ModelBindsFromAttribute : Attribute
     {
-        public Type BindsFromType { get; private set; }
-
-        public ModelBinderAttribute(Type bindsFromType)
+        public ModelBindsFromAttribute(Type bindsFromType)
         {
             BindsFromType = bindsFromType;
         }
+
+        public Type BindsFromType { get; private set; }
     }
 }

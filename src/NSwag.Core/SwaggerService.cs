@@ -9,30 +9,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using NJsonSchema;
-using NSwag.Collections;
+using Stucco.NSwag.Core.Collections;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Describes a JSON web service.</summary>
     public class SwaggerService
     {
-        /// <summary>Initializes a new instance of the <see cref="SwaggerService"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="SwaggerService" /> class.</summary>
         public SwaggerService()
         {
             Swagger = "2.0";
             Info = new SwaggerInfo();
             Schemes = new List<SwaggerSchema>();
             Responses = new Dictionary<string, SwaggerResponse>();
-            SecurityDefinitions = new Dictionary<string, SwaggerSecurityScheme>();
+            //SecurityDefinitions = new Dictionary<string, SwaggerSecurityScheme>();
 
             Info = new SwaggerInfo
             {
-                Version = string.Empty, 
+                Version = string.Empty,
                 Title = string.Empty
             };
 
@@ -52,7 +51,8 @@ namespace NSwag
         }
 
         /// <summary>Gets the NSwag toolchain version.</summary>
-        public static string ToolchainVersion => typeof(SwaggerService).GetTypeInfo().Assembly.GetName().Version.ToString();
+        public static string ToolchainVersion
+            => typeof(SwaggerService).GetTypeInfo().Assembly.GetName().Version.ToString();
 
         /// <summary>Gets or sets the Swagger specification version being used.</summary>
         [JsonProperty(PropertyName = "swagger", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -66,12 +66,13 @@ namespace NSwag
         [JsonProperty(PropertyName = "host", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string Host { get; set; }
 
-        /// <summary>Gets or sets the base path on which the API is served, which is relative to the <see cref="Host"/>.</summary>
+        /// <summary>Gets or sets the base path on which the API is served, which is relative to the <see cref="Host" />.</summary>
         [JsonProperty(PropertyName = "basePath", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public string BasePath { get; set; }
 
         /// <summary>Gets or sets the schemes.</summary>
-        [JsonProperty(PropertyName = "schemes", DefaultValueHandling = DefaultValueHandling.Ignore, ItemConverterType = typeof(StringEnumConverter))]
+        [JsonProperty(PropertyName = "schemes", DefaultValueHandling = DefaultValueHandling.Ignore,
+            ItemConverterType = typeof(StringEnumConverter))]
         public List<SwaggerSchema> Schemes { get; set; }
 
         /// <summary>Gets or sets a list of MIME types the operation can consume.</summary>
@@ -83,12 +84,13 @@ namespace NSwag
         public List<string> Produces { get; set; }
 
         /// <summary>Gets or sets the operations.</summary>
-        [JsonProperty(PropertyName = "paths", Required = Required.Always, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        public ObservableDictionary<string, SwaggerOperations> Paths { get; private set; }
+        [JsonProperty(PropertyName = "paths", Required = Required.Always,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public ObservableDictionary<string, SwaggerOperations> Paths { get; }
 
         /// <summary>Gets or sets the types.</summary>
         [JsonProperty(PropertyName = "definitions", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public ObservableDictionary<string, JsonSchema4> Definitions { get; private set; }
+        public ObservableDictionary<string, JsonSchema4> Definitions { get; }
 
         /// <summary>Gets or sets the parameters which can be used for all operations.</summary>
         [JsonProperty(PropertyName = "parameters", DefaultValueHandling = DefaultValueHandling.Ignore)]
@@ -120,71 +122,19 @@ namespace NSwag
                     return "";
 
                 if (Schemes.Any())
-                    return (Schemes.First().ToString().ToLowerInvariant() + "://" + Host + (!string.IsNullOrEmpty(BasePath) ? "/" + BasePath.Trim('/') : string.Empty)).Trim('/');
+                    return
+                        (Schemes.First().ToString().ToLowerInvariant() + "://" + Host +
+                         (!string.IsNullOrEmpty(BasePath) ? "/" + BasePath.Trim('/') : string.Empty)).Trim('/');
 
-                return ("http://" + Host + (!string.IsNullOrEmpty(BasePath) ? "/" + BasePath.Trim('/') : string.Empty)).Trim('/');
+                return
+                    ("http://" + Host + (!string.IsNullOrEmpty(BasePath) ? "/" + BasePath.Trim('/') : string.Empty))
+                        .Trim('/');
             }
         }
 
         /// <summary>Gets or sets the external documentation.</summary>
         [JsonProperty(PropertyName = "externalDocs", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public SwaggerExternalDocumentation ExternalDocumentation { get; set; }
-
-        /// <summary>Converts the description object to JSON.</summary>
-        /// <returns>The JSON string.</returns>
-        public string ToJson()
-        {
-            return ToJson(null);
-        }
-
-        /// <summary>Converts the description object to JSON.</summary>
-        /// <param name="typeNameGenerator">The type name generator.</param>
-        /// <returns>The JSON string.</returns>
-        public string ToJson(ITypeNameGenerator typeNameGenerator)
-        {
-            var settings = new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.None,
-                Formatting = Formatting.Indented
-            };
-
-            GenerateOperationIds();
-
-            JsonSchemaReferenceUtilities.UpdateSchemaReferencePaths(this, new SwaggerServiceSchemaDefinitionAppender(this, typeNameGenerator));
-            var data = JsonConvert.SerializeObject(this, settings);
-            JsonSchemaReferenceUtilities.UpdateSchemaReferences(this);
-
-            return JsonSchemaReferenceUtilities.ConvertPropertyReferences(data);
-        }
-
-        /// <summary>Creates a description object from a JSON string.</summary>
-        /// <param name="data">The JSON data.</param>
-        /// <returns>The <see cref="SwaggerService"/>.</returns>
-        public static SwaggerService FromJson(string data)
-        {
-            data = JsonSchemaReferenceUtilities.ConvertJsonReferences(data);
-            var service = JsonConvert.DeserializeObject<SwaggerService>(data, new JsonSerializerSettings
-            {
-                ConstructorHandling = ConstructorHandling.Default,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            });
-            JsonSchemaReferenceUtilities.UpdateSchemaReferences(service);
-            return service;
-        }
-
-        /// <summary>Creates a description object from a JSON string.</summary>
-        /// <param name="url">The URL.</param>
-        /// <returns>The <see cref="SwaggerService"/>.</returns>
-        public static SwaggerService FromUrl(string url)
-        {
-            dynamic client = Activator.CreateInstance(Type.GetType("System.Net.WebClient, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", true));
-            using (client)
-            {
-                var data = client.DownloadString(url);
-                return FromJson(data);
-            }
-        }
 
         /// <summary>Gets the operations.</summary>
         [JsonIgnore]
@@ -201,6 +151,67 @@ namespace NSwag
             }
         }
 
+        /// <summary>Converts the description object to JSON.</summary>
+        /// <returns>The JSON string.</returns>
+        public string ToJson()
+        {
+            return ToJson(null);
+        }        
+
+        /// <summary>Converts the description object to JSON.</summary>
+        /// <param name="typeNameGenerator">The type name generator.</param>
+        /// <returns>The JSON string.</returns>
+        public string ToJson(ITypeNameGenerator typeNameGenerator)
+        {
+            var settings = new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+                Formatting = Formatting.Indented
+            };
+
+            GenerateOperationIds();
+
+            JsonSchemaReferenceUtilities.UpdateSchemaReferencePaths(this,
+                new SwaggerServiceSchemaDefinitionAppender(this, typeNameGenerator));
+            var data = JsonConvert.SerializeObject(this, settings);
+            JsonSchemaReferenceUtilities.UpdateSchemaReferences(this);
+
+            return JsonSchemaReferenceUtilities.ConvertPropertyReferences(data);
+        }
+
+        /// <summary>Creates a description object from a JSON string.</summary>
+        /// <param name="data">The JSON data.</param>
+        /// <returns>The <see cref="SwaggerService" />.</returns>
+        public static SwaggerService FromJson(string data)
+        {
+            data = JsonSchemaReferenceUtilities.ConvertJsonReferences(data);
+            var service = JsonConvert.DeserializeObject<SwaggerService>(data, new JsonSerializerSettings
+            {
+                ConstructorHandling = ConstructorHandling.Default,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            });
+            JsonSchemaReferenceUtilities.UpdateSchemaReferences(service);
+            return service;
+        }
+
+        /// <summary>Creates a description object from a JSON string.</summary>
+        /// <param name="url">The URL.</param>
+        /// <returns>The <see cref="SwaggerService" />.</returns>
+        public static SwaggerService FromUrl(string url)
+        {
+            dynamic client =
+                Activator.CreateInstance(
+                    Type.GetType(
+                        "System.Net.WebClient, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                        true));
+            using (client)
+            {
+                var data = client.DownloadString(url);
+                return FromJson(data);
+            }
+        }
+
         /// <summary>Generates the missing or non-unique operation IDs.</summary>
         public void GenerateOperationIds()
         {
@@ -214,7 +225,11 @@ namespace NSwag
                 if (group.Count() > 1)
                 {
                     var arrayResponseOperation = operations.FirstOrDefault(
-                        a => a.Operation.Responses.Any(r => HttpUtilities.IsSuccessStatusCode(r.Key) && r.Value.Schema != null && r.Value.Schema.Type == JsonObjectType.Array));
+                        a =>
+                            a.Operation.Responses.Any(
+                                r =>
+                                    HttpUtilities.IsSuccessStatusCode(r.Key) && r.Value.Schema != null &&
+                                    r.Value.Schema.Type == JsonObjectType.Array));
 
                     if (arrayResponseOperation != null)
                     {

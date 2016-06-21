@@ -8,11 +8,10 @@
 
 using System.Collections.Generic;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The operation security requirements.</summary>
     public class SwaggerSecurityRequirement : Dictionary<string, string[]>
     {
-
     }
 }

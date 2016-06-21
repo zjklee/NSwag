@@ -7,13 +7,12 @@
 //-----------------------------------------------------------------------
 
 using NJsonSchema;
-using NSwag.Collections;
+using Stucco.NSwag.Core.Collections;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>A collection of headers.</summary>
     public class SwaggerHeaders : ObservableDictionary<string, JsonSchema4>
     {
-
     }
 }

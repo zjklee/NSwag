@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSwag.CodeGeneration.SwaggerGenerators.WebApi;
+using Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi;
 
 namespace NSwag.Tests.Specification
 {

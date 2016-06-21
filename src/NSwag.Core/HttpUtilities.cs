@@ -6,7 +6,7 @@
 // <author>Rico Suter, mail@rsuter.com</author>
 //-----------------------------------------------------------------------
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Contains HTTP utilities.</summary>
     public static class HttpUtilities

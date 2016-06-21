@@ -1,21 +1,19 @@
 ﻿using System;
-using NSwag.Interfaces;
-using System.Reflection;
-using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
+using Stucco.NSwag.Core;
+using Stucco.NSwag.Core.Interfaces;
 
-namespace NSwag.CodeGeneration.Infrastructure
+namespace Stucco.NSwag.CodeGeneration.Infrastructure
 {
     /// <summary>
-    /// 
     /// </summary>
     public class AttributeDocumentationService : IDocumentationService
     {
-        private readonly Type _type;
         private readonly string _property;
+        private readonly Type _type;
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="type"></param>
         /// <param name="property"></param>
@@ -26,7 +24,6 @@ namespace NSwag.CodeGeneration.Infrastructure
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <returns></returns>
@@ -47,14 +44,14 @@ namespace NSwag.CodeGeneration.Infrastructure
 
             if (memberInfo is ParameterInfo)
             {
-                var provider = ((ParameterInfo)memberInfo).GetCustomAttributes()
+                var provider = ((ParameterInfo) memberInfo).GetCustomAttributes()
                     .SingleOrDefault(o => o.GetType() == _type);
 
-                if(provider == null) return new Documentation();
+                if (provider == null) return new Documentation();
 
                 return new Documentation
                 {
-                    Descripation = (string)provider.GetType().GetRuntimeProperty(_property).GetValue(provider)
+                    Descripation = (string) provider.GetType().GetRuntimeProperty(_property).GetValue(provider)
                 };
             }
 

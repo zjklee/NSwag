@@ -10,19 +10,20 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The definition of a security scheme that can be used by the operations.</summary>
     public class SwaggerSecurityScheme
     {
-        /// <summary>Initializes a new instance of the <see cref="SwaggerSecurityScheme"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="SwaggerSecurityScheme" /> class.</summary>
         public SwaggerSecurityScheme()
         {
-            Scopes = new Dictionary<string, string>();   
+            Scopes = new Dictionary<string, string>();
         }
 
         /// <summary>Gets or sets the type of the security scheme.</summary>
-        [JsonProperty(PropertyName = "type", Required = Required.Always, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [JsonProperty(PropertyName = "type", Required = Required.Always,
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [JsonConverter(typeof(StringEnumConverter))]
         public SwaggerSecuritySchemeType Type { get; set; }
 

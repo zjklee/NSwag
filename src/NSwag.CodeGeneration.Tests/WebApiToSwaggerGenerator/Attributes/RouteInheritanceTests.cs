@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSwag.CodeGeneration.SwaggerGenerators.WebApi;
+using Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi;
 
 namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
 {
@@ -14,7 +14,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
         public void When_route_is_on_inherited_parent_class_and_route_prefix_on_class_then_it_is_used_for_swagger_generation()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController<MyController>();
@@ -42,7 +42,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
         public void When_route_is_on_inherited_parent_class_then_it_is_used_for_swagger_generation()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController<MyController2>();

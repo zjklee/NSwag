@@ -4,7 +4,8 @@ using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using NJsonSchema;
-using NSwag.CodeGeneration.SwaggerGenerators.WebApi;
+using Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi;
+using Stucco.NSwag.Core;
 
 namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator
 {
@@ -48,7 +49,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator
         public void When_parameter_is_from_uri_and_has_file_then_two_params_and_consumes_is_correct()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController(typeof(FromUriFileParameterController));
@@ -79,7 +80,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator
         public void When_parameter_is_file_collection_then_type_is_correct_and_collection_format_is_multi()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController(typeof(FileCollectionController));
@@ -114,7 +115,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator
         public void When_parameter_is_from_uri_then_two_params_are_generated()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController(typeof(FromUriParameterController));

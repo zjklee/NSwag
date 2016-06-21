@@ -9,15 +9,15 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using NSwag.Collections;
+using Stucco.NSwag.Core.Collections;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>A Swagger path.</summary>
     [JsonConverter(typeof(SwaggerOperationsJsonConverter))]
     public class SwaggerOperations : ObservableDictionary<SwaggerOperationMethod, SwaggerOperation>
     {
-        /// <summary>Initializes a new instance of the <see cref="SwaggerOperations"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="SwaggerOperations" /> class.</summary>
         public SwaggerOperations()
         {
             CollectionChanged += (sender, args) =>
@@ -27,7 +27,7 @@ namespace NSwag
             };
         }
 
-        /// <summary>Gets the parent <see cref="SwaggerService"/>.</summary>
+        /// <summary>Gets the parent <see cref="SwaggerService" />.</summary>
         [JsonIgnore]
         public SwaggerService Parent { get; internal set; }
 
@@ -40,7 +40,7 @@ namespace NSwag
         {
             public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
             {
-                var operations = (SwaggerOperations)value;
+                var operations = (SwaggerOperations) value;
                 writer.WriteStartObject();
                 foreach (var pair in operations)
                 {
@@ -50,7 +50,8 @@ namespace NSwag
                 writer.WriteEndObject();
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+                JsonSerializer serializer)
             {
                 if (reader.TokenType == JsonToken.Null)
                     return null;
@@ -58,9 +59,11 @@ namespace NSwag
                 var operations = new SwaggerOperations();
                 while (reader.Read() && reader.TokenType == JsonToken.PropertyName)
                 {
-                    var key = (SwaggerOperationMethod)Enum.Parse(typeof(SwaggerOperationMethod), reader.Value.ToString(), true);
+                    var key =
+                        (SwaggerOperationMethod)
+                            Enum.Parse(typeof(SwaggerOperationMethod), reader.Value.ToString(), true);
                     reader.Read();
-                    var value = (SwaggerOperation)serializer.Deserialize(reader, typeof(SwaggerOperation));
+                    var value = (SwaggerOperation) serializer.Deserialize(reader, typeof(SwaggerOperation));
                     operations.Add(key, value);
                 }
                 return operations;

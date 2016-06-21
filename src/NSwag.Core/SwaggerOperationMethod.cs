@@ -10,42 +10,34 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Enumeration of the available HTTP methods. </summary>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum SwaggerOperationMethod
     {
         /// <summary>An undefined method.</summary>
-        [EnumMember(Value = "undefined")]
-        Undefined,
+        [EnumMember(Value = "undefined")] Undefined,
 
         /// <summary>The HTTP GET method. </summary>
-        [EnumMember(Value = "get")]
-        Get,
+        [EnumMember(Value = "get")] Get,
 
         /// <summary>The HTTP POST method. </summary>
-        [EnumMember(Value = "post")]
-        Post,
+        [EnumMember(Value = "post")] Post,
 
         /// <summary>The HTTP PUT method. </summary>
-        [EnumMember(Value = "put")]
-        Put,
+        [EnumMember(Value = "put")] Put,
 
         /// <summary>The HTTP DELETE method. </summary>
-        [EnumMember(Value = "delete")]
-        Delete,
+        [EnumMember(Value = "delete")] Delete,
 
         /// <summary>The HTTP OPTIONS method. </summary>
-        [EnumMember(Value = "options")]
-        Options,
+        [EnumMember(Value = "options")] Options,
 
         /// <summary>The HTTP HEAD method. </summary>
-        [EnumMember(Value = "head")]
-        Head,
+        [EnumMember(Value = "head")] Head,
 
         /// <summary>The HTTP PATCH method. </summary>
-        [EnumMember(Value = "patch")]
-        Patch
+        [EnumMember(Value = "patch")] Patch
     }
 }

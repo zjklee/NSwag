@@ -6,13 +6,12 @@
 // <author>Rico Suter, mail@rsuter.com</author>
 //-----------------------------------------------------------------------
 
-using NSwag.Collections;
+using Stucco.NSwag.Core.Collections;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>A collection of Swagger responses.</summary>
     public class SwaggerResponses : ObservableDictionary<string, SwaggerResponse>
     {
-        
     }
 }

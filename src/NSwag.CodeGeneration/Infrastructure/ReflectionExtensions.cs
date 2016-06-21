@@ -9,7 +9,7 @@
 using System;
 using System.Reflection;
 
-namespace NSwag.CodeGeneration.Infrastructure
+namespace Stucco.NSwag.CodeGeneration.Infrastructure
 {
     /// <summary>Provides extension methods for reflection.</summary>
     public static class ReflectionExtensions
@@ -31,7 +31,6 @@ namespace NSwag.CodeGeneration.Infrastructure
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <returns></returns>

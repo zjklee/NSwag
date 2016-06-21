@@ -8,7 +8,7 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Describes a Swagger tag.</summary>
     public class SwaggerTag

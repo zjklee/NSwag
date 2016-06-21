@@ -8,13 +8,13 @@
 
 using System;
 
-namespace NSwag.Annotations
+namespace Stucco.NSwag.Annotations
 {
     /// <summary>Specifies the result type of a web service method to correctly generate a Swagger definition.</summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class ResponseTypeAttribute : Attribute
     {
-        /// <summary>Initializes a new instance of the <see cref="ResponseTypeAttribute"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ResponseTypeAttribute" /> class.</summary>
         /// <param name="responseType">The JSON result type of the MVC or Web API action method.</param>
         public ResponseTypeAttribute(Type responseType)
         {
@@ -22,7 +22,7 @@ namespace NSwag.Annotations
             ResponseType = responseType;
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ResponseTypeAttribute"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ResponseTypeAttribute" /> class.</summary>
         /// <param name="httpStatusCode">The HTTP status code for which the result type applies.</param>
         /// <param name="responseType">The JSON result type of the MVC or Web API action method.</param>
         public ResponseTypeAttribute(string httpStatusCode, Type responseType)

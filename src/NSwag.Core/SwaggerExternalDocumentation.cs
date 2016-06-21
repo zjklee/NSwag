@@ -8,7 +8,7 @@
 
 using Newtonsoft.Json;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>The external documentation description.</summary>
     public class SwaggerExternalDocumentation

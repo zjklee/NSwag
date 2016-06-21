@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>Stucco.Swagger</id>
+        <version>1.0.7</version>
+        <authors>Oleh Formaniuk</authors>
+        <description>Impruvements done here</description>
+        <tags>swagger</tags>
+        <projectUrl>http://localhost</projectUrl>
+    </metadata>
+    <files>
+        <file src="NSwag.Core\bin\Release\Stucco.NSwag.Core.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.Core\bin\Release\Stucco.NSwag.Core.pdb" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.Core\bin\Release\Stucco.NSwag.Core.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+		
+		<file src="NSwag.Annotations\bin\Release\Stucco.NSwag.Annotations.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.Annotations\bin\Release\Stucco.NSwag.Annotations.pdb" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.Annotations\bin\Release\Stucco.NSwag.Annotations.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+		
+		<file src="NSwag.CodeGeneration\bin\Release\Stucco.NSwag.CodeGeneration.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.CodeGeneration\bin\Release\Stucco.NSwag.CodeGeneration.pdb" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+        <file src="NSwag.CodeGeneration\bin\Release\Stucco.NSwag.CodeGeneration.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+		
+		<file src="NSwag.CodeGeneration\bin\Release\NJsonSchema.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />        
+        <file src="NSwag.CodeGeneration\bin\Release\NJsonSchema.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+		
+		<file src="NSwag.CodeGeneration\bin\Release\NJsonSchema.CodeGeneration.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />        
+        <file src="NSwag.CodeGeneration\bin\Release\NJsonSchema.CodeGeneration.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10" />
+    </files>
+</package>

@@ -8,15 +8,15 @@
 
 using NJsonSchema;
 using NJsonSchema.Generation;
-using NSwag.CodeGeneration.Infrastructure;
-using NSwag.Interfaces;
+using Stucco.NSwag.CodeGeneration.Infrastructure;
+using Stucco.NSwag.Core.Interfaces;
 
-namespace NSwag.CodeGeneration.SwaggerGenerators.WebApi
+namespace Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi
 {
-    /// <summary>Settings for the <see cref="WebApiToSwaggerGenerator"/>.</summary>
+    /// <summary>Settings for the <see cref="WebApiToSwaggerGenerator" />.</summary>
     public class WebApiToSwaggerGeneratorSettings : JsonSchemaGeneratorSettings
     {
-        /// <summary>Initializes a new instance of the <see cref="WebApiToSwaggerGeneratorSettings"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="WebApiToSwaggerGeneratorSettings" /> class.</summary>
         public WebApiToSwaggerGeneratorSettings()
         {
             DefaultUrlTemplate = "api/{controller}/{action}/{id}";
@@ -28,7 +28,6 @@ namespace NSwag.CodeGeneration.SwaggerGenerators.WebApi
         public string DefaultUrlTemplate { get; set; }
 
         /// <summary>
-        /// 
         /// </summary>
         public IDocumentationService DocumentationProvider { get; set; }
     }

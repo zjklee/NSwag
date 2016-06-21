@@ -9,22 +9,26 @@
 using System;
 using NJsonSchema;
 using NJsonSchema.Generation;
+using Stucco.NSwag.Core;
 
-namespace NSwag.CodeGeneration.SwaggerGenerators
+namespace Stucco.NSwag.CodeGeneration.SwaggerGenerators
 {
-    /// <summary>A <see cref="JsonSchemaGenerator"/> which only generate the schema for the root type. 
-    /// Referenced types are added to the service's Definitions collection. </summary>
+    /// <summary>
+    ///     A <see cref="JsonSchemaGenerator" /> which only generate the schema for the root type.
+    ///     Referenced types are added to the service's Definitions collection.
+    /// </summary>
     internal class RootTypeJsonSchemaGenerator : JsonSchemaGenerator
     {
-        private bool _isRootType = true;
         private readonly ISchemaDefinitionAppender _schemaDefinitionAppender;
         private readonly SwaggerService _service;
+        private bool _isRootType = true;
 
         /// <summary>Initializes a new instance of the <see cref="RootTypeJsonSchemaGenerator" /> class.</summary>
         /// <param name="service">The service.</param>
         /// <param name="schemaDefinitionAppender">The schema definition appender.</param>
         /// <param name="settings">The settings.</param>
-        public RootTypeJsonSchemaGenerator(SwaggerService service, ISchemaDefinitionAppender schemaDefinitionAppender, JsonSchemaGeneratorSettings settings) : base(settings)
+        public RootTypeJsonSchemaGenerator(SwaggerService service, ISchemaDefinitionAppender schemaDefinitionAppender,
+            JsonSchemaGeneratorSettings settings) : base(settings)
         {
             _service = service;
             _schemaDefinitionAppender = schemaDefinitionAppender;
@@ -37,7 +41,8 @@ namespace NSwag.CodeGeneration.SwaggerGenerators
         /// <param name="rootSchema">The root schema.</param>
         /// <param name="schemaDefinitionAppender"></param>
         /// <param name="schemaResolver">The schema resolver.</param>
-        protected override void GenerateObject<TSchemaType>(Type type, TSchemaType schema, JsonSchema4 rootSchema, ISchemaDefinitionAppender schemaDefinitionAppender, ISchemaResolver schemaResolver)
+        protected override void GenerateObject<TSchemaType>(Type type, TSchemaType schema, JsonSchema4 rootSchema,
+            ISchemaDefinitionAppender schemaDefinitionAppender, ISchemaResolver schemaResolver)
         {
             if (_isRootType)
             {

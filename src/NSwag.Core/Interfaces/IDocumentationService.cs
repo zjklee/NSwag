@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-
-namespace NSwag.Interfaces
+﻿namespace Stucco.NSwag.Core.Interfaces
 {
     public interface IDocumentationService
     {

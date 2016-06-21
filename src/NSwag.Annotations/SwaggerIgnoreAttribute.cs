@@ -8,7 +8,7 @@
 
 using System;
 
-namespace NSwag.Annotations
+namespace Stucco.NSwag.Annotations
 {
     /// <summary>Excludes an action method from the generated Swagger specification.</summary>
     public class SwaggerIgnoreAttribute : Attribute

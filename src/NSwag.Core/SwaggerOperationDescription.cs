@@ -6,7 +6,7 @@
 // <author>Rico Suter, mail@rsuter.com</author>
 //-----------------------------------------------------------------------
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Flattened information about an operation.</summary>
     public class SwaggerOperationDescription

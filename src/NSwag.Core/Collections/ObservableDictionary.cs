@@ -13,7 +13,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-namespace NSwag.Collections
+namespace Stucco.NSwag.Core.Collections
 {
     /// <summary>An implementation of an observable dictionary.</summary>
     /// <typeparam name="TKey">The type of the key.</typeparam>
@@ -22,56 +22,88 @@ namespace NSwag.Collections
         IDictionary<TKey, TValue>, INotifyCollectionChanged,
         INotifyPropertyChanged, IDictionary, IReadOnlyDictionary<TKey, TValue>
     {
-        private IDictionary<TKey, TValue> _dictionary;
-
-        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
+        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}" /> class. </summary>
         public ObservableDictionary()
         {
-            _dictionary = new Dictionary<TKey, TValue>();
+            Dictionary = new Dictionary<TKey, TValue>();
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
+        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}" /> class. </summary>
         /// <param name="dictionary">The dictionary to initialize this dictionary. </param>
         public ObservableDictionary(IDictionary<TKey, TValue> dictionary)
         {
-            _dictionary = new Dictionary<TKey, TValue>(dictionary);
+            Dictionary = new Dictionary<TKey, TValue>(dictionary);
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
+        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}" /> class. </summary>
         /// <param name="comparer">The comparer. </param>
         public ObservableDictionary(IEqualityComparer<TKey> comparer)
         {
-            _dictionary = new Dictionary<TKey, TValue>(comparer);
+            Dictionary = new Dictionary<TKey, TValue>(comparer);
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
+        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}" /> class. </summary>
         /// <param name="capacity">The capacity. </param>
         public ObservableDictionary(int capacity)
         {
-            _dictionary = new Dictionary<TKey, TValue>(capacity);
+            Dictionary = new Dictionary<TKey, TValue>(capacity);
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
+        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}" /> class. </summary>
         /// <param name="dictionary">The dictionary to initialize this dictionary. </param>
         /// <param name="comparer">The comparer. </param>
         public ObservableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer)
         {
-            _dictionary = new Dictionary<TKey, TValue>(dictionary, comparer);
+            Dictionary = new Dictionary<TKey, TValue>(dictionary, comparer);
         }
 
-        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}"/> class. </summary>
+        /// <summary>Initializes a new instance of the <see cref="ObservableDictionary{TKey, TValue}" /> class. </summary>
         /// <param name="capacity">The capacity. </param>
         /// <param name="comparer">The comparer. </param>
         public ObservableDictionary(int capacity, IEqualityComparer<TKey> comparer)
         {
-            _dictionary = new Dictionary<TKey, TValue>(capacity, comparer);
+            Dictionary = new Dictionary<TKey, TValue>(capacity, comparer);
         }
 
         /// <summary>Gets the underlying dictonary. </summary>
-        protected IDictionary<TKey, TValue> Dictionary
+        protected IDictionary<TKey, TValue> Dictionary { get; private set; }
+
+        #region IEnumerable<KeyValuePair<TKey,TValue>> interface
+
+        /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        /// <returns>
+        ///     A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the
+        ///     collection.
+        /// </returns>
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            get { return _dictionary; }
+            return Dictionary.GetEnumerator();
         }
+
+        #endregion
+
+        #region IEnumerable interface
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable) Dictionary).GetEnumerator();
+        }
+
+        #endregion
+
+        #region INotifyCollectionChanged interface
+
+        /// <summary>Occurs when the collection has changed.</summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        #endregion
+
+        #region INotifyPropertyChanged interface
+
+        /// <summary>Occurs when a property has changed.</summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
 
         /// <summary>Adds multiple key-value pairs the the dictionary. </summary>
         /// <param name="items">The key-value pairs. </param>
@@ -91,7 +123,7 @@ namespace NSwag.Collections
                         Dictionary.Add(item);
                 }
                 else
-                    _dictionary = new Dictionary<TKey, TValue>(items);
+                    Dictionary = new Dictionary<TKey, TValue>(items);
 
                 OnCollectionChanged(NotifyCollectionChangedAction.Add, items.ToArray());
             }
@@ -113,7 +145,8 @@ namespace NSwag.Collections
                     return;
 
                 Dictionary[key] = value;
-                OnCollectionChanged(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value), new KeyValuePair<TKey, TValue>(key, item));
+                OnCollectionChanged(NotifyCollectionChangedAction.Replace, new KeyValuePair<TKey, TValue>(key, value),
+                    new KeyValuePair<TKey, TValue>(key, item));
             }
             else
             {
@@ -155,7 +188,8 @@ namespace NSwag.Collections
         /// <param name="action">The action.</param>
         /// <param name="newItem">The new item.</param>
         /// <param name="oldItem">The old item.</param>
-        protected void OnCollectionChanged(NotifyCollectionChangedAction action, KeyValuePair<TKey, TValue> newItem, KeyValuePair<TKey, TValue> oldItem)
+        protected void OnCollectionChanged(NotifyCollectionChangedAction action, KeyValuePair<TKey, TValue> newItem,
+            KeyValuePair<TKey, TValue> oldItem)
         {
             OnPropertyChanged();
             var copy = CollectionChanged;
@@ -200,15 +234,24 @@ namespace NSwag.Collections
             return Dictionary.ContainsKey(key);
         }
 
-        /// <summary>Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the <see cref="T:System.Collections.Generic.IDictionary`2" />.</summary>
+        /// <summary>
+        ///     Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the keys of the
+        ///     <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        /// </summary>
         public ICollection<TKey> Keys
         {
             get { return Dictionary.Keys; }
         }
 
-        ICollection IDictionary.Values { get { return ((IDictionary)Dictionary).Values; } }
+        ICollection IDictionary.Values
+        {
+            get { return ((IDictionary) Dictionary).Values; }
+        }
 
-        ICollection IDictionary.Keys { get { return ((IDictionary)Dictionary).Keys; } }
+        ICollection IDictionary.Keys
+        {
+            get { return ((IDictionary) Dictionary).Keys; }
+        }
 
         IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values
         {
@@ -248,7 +291,10 @@ namespace NSwag.Collections
             get { return Keys; }
         }
 
-        /// <summary>Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the <see cref="T:System.Collections.Generic.IDictionary`2" />.</summary>
+        /// <summary>
+        ///     Gets an <see cref="T:System.Collections.Generic.ICollection`1" /> containing the values in the
+        ///     <see cref="T:System.Collections.Generic.IDictionary`2" />.
+        /// </summary>
         public ICollection<TValue> Values
         {
             get { return Dictionary.Values; }
@@ -277,7 +323,7 @@ namespace NSwag.Collections
 
         void IDictionary.Add(object key, object value)
         {
-            Insert((TKey)key, (TValue)value, true);
+            Insert((TKey) key, (TValue) value, true);
         }
 
         /// <summary>Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
@@ -316,23 +362,26 @@ namespace NSwag.Collections
         /// <returns></returns>
         public bool Contains(object key)
         {
-            return ContainsKey((TKey)key);
+            return ContainsKey((TKey) key);
         }
 
         IDictionaryEnumerator IDictionary.GetEnumerator()
         {
-            return ((IDictionary)Dictionary).GetEnumerator();
+            return ((IDictionary) Dictionary).GetEnumerator();
         }
 
         /// <summary>Removes the specified key.</summary>
         /// <param name="key">The key.</param>
         public void Remove(object key)
         {
-            Remove((TKey)key);
+            Remove((TKey) key);
         }
 
         /// <summary>Gets a value indicating whether the <see cref="T:System.Collections.IDictionary" /> object has a fixed size.</summary>
-        public bool IsFixedSize { get { return false; } }
+        public bool IsFixedSize
+        {
+            get { return false; }
+        }
 
         /// <summary>Determines whether [contains] [the specified item].</summary>
         /// <param name="item">The item.</param>
@@ -355,7 +404,7 @@ namespace NSwag.Collections
         /// <param name="index">The index.</param>
         public void CopyTo(Array array, int index)
         {
-            ((IDictionary)Dictionary).CopyTo(array, index);
+            ((IDictionary) Dictionary).CopyTo(array, index);
         }
 
         /// <summary>Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1" />.</summary>
@@ -364,7 +413,10 @@ namespace NSwag.Collections
             get { return Dictionary.Count; }
         }
 
-        /// <summary>Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized (thread safe).</summary>
+        /// <summary>
+        ///     Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized
+        ///     (thread safe).
+        /// </summary>
         public bool IsSynchronized { get; private set; }
 
         /// <summary>Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />.</summary>
@@ -378,8 +430,8 @@ namespace NSwag.Collections
 
         object IDictionary.this[object key]
         {
-            get { return this[(TKey)key]; }
-            set { this[(TKey)key] = (TValue)value; }
+            get { return this[(TKey) key]; }
+            set { this[(TKey) key] = (TValue) value; }
         }
 
         /// <summary>Removes the specified item.</summary>
@@ -391,40 +443,5 @@ namespace NSwag.Collections
         }
 
         #endregion
-
-        #region IEnumerable<KeyValuePair<TKey,TValue>> interface
-
-        /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        /// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.</returns>
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
-        {
-            return Dictionary.GetEnumerator();
-        }
-
-        #endregion
-
-        #region IEnumerable interface
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return ((IEnumerable)Dictionary).GetEnumerator();
-        }
-
-        #endregion
-
-        #region INotifyCollectionChanged interface
-
-        /// <summary>Occurs when the collection has changed.</summary>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        #endregion
-
-        #region INotifyPropertyChanged interface
-
-        /// <summary>Occurs when a property has changed.</summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
     }
 }
-

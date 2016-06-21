@@ -7,14 +7,13 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
 using Newtonsoft.Json;
 using NJsonSchema;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Describes an operation parameter. </summary>
-    public class SwaggerParameter : JsonSchema4 
+    public class SwaggerParameter : JsonSchema4
     {
         /// <summary>Gets or sets the name.</summary>
         [JsonProperty(PropertyName = "name", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -28,19 +27,27 @@ namespace NSwag
         [JsonProperty(PropertyName = "required", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool IsRequired { get; set; } = false;
 
-        /// <summary>Gets or sets the schema which is only available when <see cref="Kind"/> == body.</summary>
+        /// <summary>Gets or sets the schema which is only available when <see cref="Kind" /> == body.</summary>
         [JsonProperty(PropertyName = "schema", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public JsonSchema4 Schema { get; set; }
+
+        /// <summary>Gets or sets the schema which is only available when <see cref="Kind" /> == body.</summary>
+        [JsonProperty(PropertyName = "default", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        public object DefaultVaule { get; set; }
 
         /// <summary>Sets a value indicating whether the parameter can be null (use IsNullable() to get a parameter's nullability).</summary>
         /// <remarks>The Swagger spec does not support null in schemas, see https://github.com/OAI/OpenAPI-Specification/issues/229 </remarks>
         [JsonProperty(PropertyName = "x-nullable", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         public bool? IsNullableRaw { internal get; set; }
 
-        /// <summary>Gets the actual schema, either the parameter schema itself (or its reference) or the <see cref="Schema"/> property when <see cref="Kind"/> == body.</summary>
+        /// <summary>
+        ///     Gets the actual schema, either the parameter schema itself (or its reference) or the <see cref="Schema" />
+        ///     property when <see cref="Kind" /> == body.
+        /// </summary>
         /// <exception cref="InvalidOperationException" accessor="get">The schema reference path is not resolved.</exception>
         [JsonIgnore]
-        public override JsonSchema4 ActualSchema => Kind == SwaggerParameterKind.Body ? Schema.ActualSchema : base.ActualSchema;
+        public override JsonSchema4 ActualSchema
+            => Kind == SwaggerParameterKind.Body ? Schema.ActualSchema : base.ActualSchema;
 
         /// <summary>Gets or sets the format of the array if type array is used.</summary>
         [JsonProperty(PropertyName = "collectionFormat", DefaultValueHandling = DefaultValueHandling.Ignore)]

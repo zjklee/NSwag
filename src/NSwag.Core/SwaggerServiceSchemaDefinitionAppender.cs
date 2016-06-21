@@ -9,7 +9,7 @@
 using System;
 using NJsonSchema;
 
-namespace NSwag
+namespace Stucco.NSwag.Core
 {
     /// <summary>Appends a JSON Schema to the Definitions of a Swagger service.</summary>
     public class SwaggerServiceSchemaDefinitionAppender : ISchemaDefinitionAppender
@@ -23,7 +23,7 @@ namespace NSwag
         public SwaggerServiceSchemaDefinitionAppender(SwaggerService service, ITypeNameGenerator typeNameGenerator)
         {
             _service = service;
-            _typeNameGenerator = typeNameGenerator; 
+            _typeNameGenerator = typeNameGenerator;
         }
 
         /// <summary>Appends the schema to the root object.</summary>
@@ -31,7 +31,7 @@ namespace NSwag
         /// <param name="objectToAppend">The object to append.</param>
         public void Append(object root, JsonSchema4 objectToAppend)
         {
-            var typeName = objectToAppend.GetTypeName(_typeNameGenerator); 
+            var typeName = objectToAppend.GetTypeName(_typeNameGenerator);
             if (!string.IsNullOrEmpty(typeName) && !_service.Definitions.ContainsKey(typeName))
                 _service.Definitions[typeName] = objectToAppend;
             else

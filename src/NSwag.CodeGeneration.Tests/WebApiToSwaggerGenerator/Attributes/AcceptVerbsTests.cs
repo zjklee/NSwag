@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSwag.CodeGeneration.SwaggerGenerators.WebApi;
+using Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi;
+using Stucco.NSwag.Core;
 
 namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
 {
@@ -39,7 +40,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
         public void When_accept_verbs_attribute_with_post_is_used_then_http_method_is_correct()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController<TestController>();
@@ -53,7 +54,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
         public void When_accept_verbs_attribute_with_get_is_used_then_http_method_is_correct()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController<TestController>();
@@ -67,7 +68,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
         public void When_accept_verbs_attribute_with_delete_is_used_then_http_method_is_correct()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController<TestController>();
@@ -81,7 +82,7 @@ namespace NSwag.CodeGeneration.Tests.WebApiToSwaggerGenerator.Attributes
         public void When_accept_verbs_attribute_with_put_is_used_then_http_method_is_correct()
         {
             //// Arrange
-            var generator = new SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
+            var generator = new Stucco.NSwag.CodeGeneration.SwaggerGenerators.WebApi.WebApiToSwaggerGenerator(new WebApiToSwaggerGeneratorSettings());
 
             //// Act
             var service = generator.GenerateForController<TestController>();
