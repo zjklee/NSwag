@@ -35,7 +35,7 @@
     <DocumentationFile>bin\Release\Stucco.NSwag.Annotations.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>../NSwag.snk</AssemblyOriginatorKeyFile>
